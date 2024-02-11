@@ -2,11 +2,17 @@ import products from "../models/products.model.js";
 import extend from 'lodash/extend.js'
 import errorHandler from "./../helpers/dbErrorHandler.js";
 
+
 const list = async(req, res) => {
     try{
-        console.log("products > list");
-        console.log(req.params);
-        let myList = await products.find().select("name description price quantity category");
+        //console.log("products > list");
+        //console.log(req.query.name);
+        let queryAry = {};
+        if (req.query.name){
+            queryAry["name"] = {'$regex': req.query.name};
+        }
+        //console.log(queryAry);
+        let myList = await products.find(queryAry).select("name description price quantity category");
         res.json(myList);
        
     }

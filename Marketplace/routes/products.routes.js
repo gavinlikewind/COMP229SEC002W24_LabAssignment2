@@ -2,8 +2,9 @@ import express from "express";
 import productsCtrl from "../controllers/products.controller.js";
 const router = express.Router();
 
+
 //connect the route to controller
-router.route("/api/products?:name?").get(productsCtrl.list);
+router.route("/api/products").get(productsCtrl.list);
 router.route("/api/products").post(productsCtrl.create);
 router.route("/api/products").delete(productsCtrl.removeAll);
 
